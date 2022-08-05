@@ -1,0 +1,22 @@
+* QNNV - Quantized Neural Network Verification
+** Installing dependencies
+*** PySMT
++ We have provided a [[file:install_pysmt_boolector.sh][script]] which can automate the installation of PySMT and Boolector.
++ We use a [[https://github.com/soarlab/pysmt][fork]] of PySMT that has support for fixed-point primitives. Clone and install using =python setup.py install=.
++ Use =pysmt-install= to install the solver of your choice. We used [[https://github.com/Boolector/boolector][Boolector]] which can be installed with =pysmt-install --btor=.
+*** Gurobi
++ Download the Gurobi optimizer tar.
++ Extract and move it under =/opt=.
++ =cd /opt/gurobixxx/linux64/= where =xxx= refers to the specific gurobi version.
++ Add =/opt/gurobixxx/linux64/bin= to =$PATH=.
++ Install python bindings using =python setup.py install=.
++ =export LD_LIBRARY_PATH=/opt/gurobi952/linux64/lib=
+*** GLPK
++ Install GLPK using =sudo apt install glpk-utils=.
+*** Python
++ =pip install tensorflow numpy bitstring=
+** Running tests
+All tests can be executed by running the [[file:RunAllTests.sh][test script]]. The script outputs the results in [[https://orgmode.org/][Org]] markup.
+#+begin_src sh
+  sh RunAllTests.sh | tee Results.org
+#+end_src
