@@ -141,7 +141,7 @@ def encodeNeuronLateShift(encoder: FixedPointEncoder, inputVars, layerNo,
     prevLayerFloatBits = [t[1] for t in encoder.typeData[layerNo]]
     prevLayerIntBits = [t[0] for t in encoder.typeData[layerNo]]
 
-    maxFloat = max(prevLayerFloatBits)
+    maxFloat = min(prevLayerFloatBits)
 
     model = encoder.model
 
@@ -152,7 +152,7 @@ def encodeNeuronLateShift(encoder: FixedPointEncoder, inputVars, layerNo,
 
     if len(np.unique(prevLayerFloatBits)) != 1:
         # Will have to align the fractional-parts
-        # will do that by shifting all of them left
+        # will do that by shifting all of them right
         inputVars = [
             convertToDifferentFP(ip, ib, pfb, maxFloat) for ip, ib, pfb in zip(
                 inputVars, prevLayerIntBits, prevLayerFloatBits)
